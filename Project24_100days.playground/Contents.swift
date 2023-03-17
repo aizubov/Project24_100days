@@ -89,6 +89,7 @@ attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range
 attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 32), range: NSRange(location: 10, length: 4))
 attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 40), range: NSRange(location: 15, length: 6))
 
+//MARK: Challenge 1
 
 extension String {
     func withPrefix(_ prefix: String) -> String {
@@ -100,6 +101,7 @@ extension String {
 var word2 = "pet"
 let word2Pref = word2.withPrefix("car")
 
+//MARK: Challenge 2. In Python I'd do this in one line tho :/ But in Python I would'd be able to use emojis as variables, so I'll call it a draw.
 
 extension String {
     func isNumeric() -> Bool {
@@ -119,13 +121,31 @@ let numericTestIntInString = "She's a wisted 3ckster"
 let numericTestFloatInString = "I love cakes and 3.14159es"
 let numericTestFloatInStringComma = "I love cakes and 3,14159es"
 
-let numericTestFail = numericTestStringOnly.isNumeric()
+let 😊 = numericTestStringOnly.isNumeric()
 let numericTestPassOne = numericTestFloat.isNumeric()
 let numericTestPassTwo = numericTestInt.isNumeric()
 let numericTestPassThree = numericTestFloatInString.isNumeric()
 let numericTestPassFour = numericTestIntInString.isNumeric()
 let numericTestPassFive = numericTestFloatInStringComma.isNumeric()
 
+//MARK: Challenge 3, the first solution just works, the second one is to flex :)
+
+let linesToCount = "this\nis\na\ntest"
+let noLinesToCount = "this is a test"
+
+extension String {
+    func lines() -> Int {
+        let range = self.split(separator: "\n")
+        print(range)
+        if range.count > 1 {
+            return range.count
+        }
+        return 1
+    }
+}
+
+let linesCount = linesToCount.lines()
+let noLinesCount = noLinesToCount.lines()
 
 extension String {
     func linesRE() -> Int {
@@ -136,22 +156,9 @@ extension String {
         if regex.firstMatch(in: self, options: [], range: range) != nil {
             return results.map{nsString.substring(with: $0.range)}.count + 1
         }
-        return 0
+        return 1
     }
 }
-
-let linesToCount = "this\nis\na\ntest"
 
 let linesCountRE = linesToCount.linesRE()
-
-extension String {
-    func lines() -> Int {
-        let range = self.split(separator: "\n")
-        if range.count != 0 {
-            return range.count
-        }
-        return 0
-    }
-}
-
-let linesCount = linesToCount.lines()
+let noLinesCountRE = noLinesToCount.linesRE()
